@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= shoe.name %>
+    </title>
+</head>
+<body>
+
+    <%- include('../partials/_navbar.ejs') %>
+    
+        <h1>The <em style="color: <%= shoe.color %>;">
+                <%= shoe.brand %> <%= shoe.name %>
+            </em> Page</h1>
+        <p>Name: <%= shoe.name %></p>
+        <p>Brand: <%= shoe.brand %></p>
+        <p>Price: $<%= shoe.price %></p>
+        <p>Color: <%= shoe.color %></p>
+        <p>Size: <%= shoe.size %></p>
+        <p>Description: <%= shoe.description %></p>
+        <p><img src="<%= shoe.imageUrl %>" alt="Shoe Image" width="400" height=auto></p>
+
+        <div class="shoe-actions">
+            <a class="edit-link" href="/shoes/<%= shoe._id %>/edit">
+                <button class="edit-text">Edit <%= shoe.name %></button>
+            </a>
+
+            <a href="/shoes/<%= shoe._id %>/confirm_delete">
+                <button type="submit"> Delete <%= shoe.name %></button>
+            </a>
+
+            <form class="shoe-action-form" action="/shoes/<%= shoe._id %>/soft?_method=DELETE" method="POST">
+                <button type="submit">Soft Delete <%= shoe.name %></button>
+            </form>
+
+            <a class="shoes-index-link" href="/shoes">
+                <div class="index-link-text">Back to Shoes</div>
+            </a>
+        </div>
+
+</body>
+</html>

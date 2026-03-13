@@ -1,0 +1,14 @@
+<link rel="stylesheet" href="/stylesheets/style.css">
+
+<nav>
+    <a href="/">Home</a>
+    <a href="/shoes">All Shoes</a>
+    <a href="/shoes/new">Add Shoe</a>
+    <% if (currentUser) { %>
+        <span class="nav-user">Signed in as <%= currentUser.username %></span>
+        <a href="/auth/sign-out">Sign Out</a>
+    <% } else { %>
+        <a href="/auth/sign-in">Sign In</a>
+        <a href="/auth/sign-up">Sign Up</a>
+    <% } %>
+</nav>
