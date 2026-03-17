@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-        <%= shoe.name %>
+        <%= shoe.brand %> <%= shoe.model %>
     </title>
 </head>
 <body>
@@ -22,11 +22,11 @@
 
         <div class="shoe-actions">
             <a class="edit-link" href="/shoes/<%= shoe._id %>/edit">
-                <button class="edit-text">Edit <%= shoe.name %></button>
+                <button class="edit-text">Edit <%= shoe.brand %> <%= shoe.model %></button>
             </a>
 
             <a href="/shoes/<%= shoe._id %>/confirm_delete">
-                <button type="submit"> Delete <%= shoe.name %></button>
+                <button type="submit"> Delete <%= shoe.brand %> <%= shoe.model %></button>
             </a>
 
             <a class="shoes-index-link" href="/shoes">
