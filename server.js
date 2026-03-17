@@ -8,8 +8,10 @@ require("dotenv").config();
 const Shoe = require("./models/shoe.js");
 require("./db/connection.js");
 
-const shoeController = require("./controllers/shoe.controller.js");
+const shoeController = require("./controllers/shoes.js");
 const authController = require("./controllers/auth.js");
+const authRequired = require("./middleware/isUserAuthorized");
+const passDataToView = require("./middleware/passDataToView");
 const bcrypt = require("bcrypt");
 const morgan = require("morgan");
 
@@ -38,25 +40,27 @@ app.use(
     }),
 );
 
+app.use(passDataToView);
+
 // Custom middleware to make the current user available in all views as a variable called currentUser
 app.use((req, res, next) => {
     res.locals.currentUser = req.session.user || null;
     next();
 });
 
-// Middleware function to protect routes that require authentication
-const isSignedIn = (req, res, next) => {
-    if (req.session.user) return next();
-    return res.redirect("/auth/sign-in");
-};
+
 
 // Routes
-app.use("/shoes", isSignedIn, shoeController);
 app.use("/auth", authController);
+app.use("/shoes", authRequired, shoeController);
+
 
 app.get("/", async (req, res) => {
-    if (!req.session.user) return res.redirect("/auth/sign-in");
-    res.render("index.ejs");
+    if (req.session.user) {
+        res.redirect("/shoes");
+    } else {
+        res.render("index.ejs");
+    }
 });
 
 app.get("*slug", (req, res) => {

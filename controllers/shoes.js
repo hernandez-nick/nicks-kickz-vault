@@ -6,25 +6,13 @@ const router = express.Router();
 // Index Route - GET /shoes
 module.exports = router;
 
-// I.ND.U.C.E.S. (RESTful Routes)
-
-// Index - GET /shoes - get all the shoes and send back a page
-// New - GET /shoes/new - send a form page to create a new shoe
-// Delete - Delete /shoes/:shoeId - delete some shoes based on the param passed
-// Update - PUT /shoes/:shoeId - update some shoes based on the param passwed and req.body
-// Create - POST /shoes - take data from shoes/new form and add a new shoe to the database
-// Edit - GET /shoes/:shoeId/edit - edit a specific shoe
-// Show - GET /shoes/:shoeId - show one specific shoe
-
-// Extra routes not part of RESTful convention:
-// Soft Delete - Delete /shoes/:shoeId - delete some shoes based on the param passed, but instead of actually deleting the document, set a isSoftDeleted field to true and filter for that in the index route so it doesn't show up on the index page
-// GET /shoes/:shoeId/confirm_delete - show a confirmation page before deleting a shoe
-
 // Index - GET /shoes - get all the shoes and send back a page
 router.get("/", async (req, res) => {
     try {
     // Find all the shoes in the database and send them to the index.ejs page as a variable called shoes
-    const shoes = await Shoe.find({ isSoftDeleted: { $in: [false, null] } });
+    const shoes = await Shoe.find({
+        owner: req.session.user._id,
+    });
         res.render("shoes/index.ejs", { shoes: shoes });
     } catch (error) {
         res.render("error.ejs", { message: error.message });
@@ -40,7 +28,10 @@ res.render("shoes/new.ejs");
 router.delete("/:shoeId", async (req, res) => {
     try {
     // Find the shoe in the database with the id from the url params and delete it, then redirect back to the index page
-    await Shoe.findByIdAndDelete(req.params.shoeId);
+    await Shoe.findOneAndDelete({
+        _id: req.params.shoeId,
+        owner: req.session.user._id,
+    });
         res.redirect("/shoes");
     } catch (error) {
         res.render("error.ejs", { message: error.message });
@@ -51,19 +42,12 @@ router.delete("/:shoeId", async (req, res) => {
 router.put("/:shoeId", async (req, res) => {
     try {
     // Find the shoe in the database with the id from the url params and update it with the data from req.body, then redirect back to the index page
-        await Shoe.findByIdAndUpdate(req.params.shoeId, req.body);
+        await Shoe.findOneAndUpdate(
+            { _id: req.params.shoeId, owner: req.session.user._id },
+            req.body,
+            { new: true },
+        );
         res.redirect(`/shoes/${req.params.shoeId}`);
-    } catch (error) {
-        res.render("error.ejs", { message: error.message });
-    }
-});
-
-// Soft Delete - Delete /shoes/:shoeId/soft - mark a shoe as soft deleted
-router.delete("/:shoeId/soft", async (req, res) => {
-    try {
-    // Find the shoe in the database with the id from the url params and soft delete it, then redirect back to the index page
-    await Shoe.findByIdAndUpdate(req.params.shoeId, { isSoftDeleted: true });
-        res.redirect("/shoes");
     } catch (error) {
         res.render("error.ejs", { message: error.message });
     }
@@ -75,11 +59,12 @@ router.post("/", async (req, res) => {
     // Check for an empty name field, if it's empty throw a manual error to be caught by the catch block
     const { name, brand, price, color, description } = req.body;
     // If I trim the name and color and they are falsy (empty string, null, undefined) then throw an error
-    if (!name.trim() || !brand.trim() || !color.trim())
+    if (!name || !brand || !color) {
         return res.render("shoes/new.ejs", {
-        message:
-            "Name, brand, and color fields cannot be empty, please try again",
-    });
+            message:
+                "Name, brand, and color fields cannot be empty, please try again",
+        });
+    }
 
     if (description && description.length > 100) {  
         return res.render("shoes/new.ejs", {
@@ -89,7 +74,10 @@ router.post("/", async (req, res) => {
 }
 
 // Give the form data to the model.create to make a new mongodb document
-    await Shoe.create(req.body);
+    await Shoe.create({
+        ...req.body,
+        owner: req.session.user._id,
+    });
     // Redirect the user back to the index page after creating the new shoe
         res.redirect("/shoes");
     } catch (error) {
@@ -101,7 +89,10 @@ router.post("/", async (req, res) => {
 router.get("/:shoeId/confirm_delete", async (req, res) => {
     try {
     // Find the shoe in the database with the id from the url params and send it to the show.ejs page as a variable called shoe
-    const foundShoe = await Shoe.findById(req.params.shoeId);
+    const foundShoe = await Shoe.findOne({
+        _id: req.params.shoeId,
+        owner: req.session.user._id,
+    });
     // If no shoe is found, throw a manual error to be caught by the catch block
     if (!foundShoe)
         throw new Error(
@@ -120,7 +111,10 @@ router.get("/:shoeId/confirm_delete", async (req, res) => {
 router.get("/:shoeId/edit", async (req, res) => {
     try {
     // Find the shoe in the database with the id from the url params and send it to the show.ejs page as a variable called shoe
-    const foundShoe = await Shoe.findById(req.params.shoeId);
+    const foundShoe = await Shoe.findOne({
+        _id: req.params.shoeId,
+        owner: req.session.user._id,
+    });
     // If no shoe is found, throw a manual error to be caught by the catch block
     if (!foundShoe)
         throw new Error(
@@ -139,7 +133,10 @@ router.get("/:shoeId/edit", async (req, res) => {
 router.get("/:shoeId", async (req, res) => {
     try {
     // Find the shoe in the database with the id from the url params and send it to the show.ejs page as a variable called shoe
-    const foundShoe = await Shoe.findById(req.params.shoeId);
+    const foundShoe = await Shoe.findOne({
+        _id: req.params.shoeId,
+        owner: req.session.user._id,
+    });
     // If no shoe is found, throw a manual error to be caught by the catch block
     if (!foundShoe)
         throw new Error(
