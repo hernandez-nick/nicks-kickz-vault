@@ -1,6 +1,6 @@
 # Nick's Kickz Vault
 
-![Nick's Kickz Vault screenshot](https://ibb.co/B9Nr2Gr)
+![Nick's Kickz Vault screenshot](https://i.ibb.co/TsLbM1b/image.png)
 
 ## Description
 
