@@ -6,46 +6,72 @@
     <title>Add A Shoe</title>
 </head>
 <body>
-    
+
     <%- include('../partials/_navbar.ejs', { title: "Add A Shoe" }) %>
 
-    <h1>Add A Shoe</h1>
+    <main class="main-content">
+        <section class="form-card">
+            
+            <h1 class="page-title">Add A Shoe</h1>
 
-    <form action="/shoes" method="POST">
+            <form class="shoe-form" action="/shoes" method="POST">
+                <% if (typeof(message) !== "undefined") { %>
+                    <p class="form-error"><%= message %></p>
+                <% } %>
 
-        <label for="brand">Brand:</label>
-        <input type="text" id="brand" name="brand" required>
+                <div class="form-grid">
+                    <div class="field-group">
+                        <label for="brand">Brand</label>
+                        <input type="text" id="brand" name="brand" required>
+                    </div>
 
-        <label for="model">Model:</label>
-        <input type="text" id="model" name="model" required>
+                    <div class="field-group">
+                        <label for="model">Model</label>
+                        <input type="text" id="model" name="model" required>
+                    </div>
 
-        <label for="colorway">Colorway:</label>
-        <input type="text" id="colorway" name="colorway" required>
+                    <div class="field-group">
+                        <label for="colorway">Colorway</label>
+                        <input type="text" id="colorway" name="colorway" required>
+                    </div>
 
-        <label for="size">Size:</label>
-        <input type="number" id="size" name="size" required>
+                    <div class="field-group">
+                        <label for="retailPrice">Retail Price</label>
+                        <input type="number" id="retailPrice" name="retailPrice" required>
+                    </div>
 
-        <label for="retailPrice">Retail Price:</label>
-        <input type="number" id="retailPrice" name="retailPrice" required>
+                    <div class="field-group">
+                        <label for="size">Size</label>
+                        <input type="number" id="size" name="size" required>
+                    </div>
 
-        <label for="isDeadstock">Deadstock:</label>
-        <input type="checkbox" id="isDeadstock" name="isDeadstock">
+                    <div class="field-group field-group-checkbox">
+                        <label for="isDeadstock">Deadstock</label>
+                        <input type="checkbox" id="isDeadstock" name="isDeadstock">
+                    </div>
 
-        <label for="imageUrl">Image URL:</label>
-        <input type="url" id="imageUrl" name="imageUrl" required>
+                    <div class="field-group field-group-full">
+                        <label for="imageUrl">Image URL</label>
+                        <input type="url" id="imageUrl" name="imageUrl" required>
+                    </div>
 
-        <label for="description">Description:</label>
-        <textarea 
-        name="description" 
-        id="description" 
-        placeholder="Please enter a description of 100 characters or less."
-        maxlength="100" 
-        type="text" 
-        required></textarea>
+                    <div class="field-group field-group-full">
+                        <label for="description">Description</label>
+                        <textarea
+                            name="description"
+                            id="description"
+                            placeholder="Please enter a description of 100 characters or less."
+                            maxlength="100"
+                            required></textarea>
+                    </div>
+                </div>
 
-        <button type="submit">Add Shoe</button>
-    </form>
-
-        <button onclick="window.history.back()">Go Back</button>
+                <div class="shoe-actions">
+                    <button class="btn-primary" type="submit">Add Shoe</button>
+                    <button class="btn-secondary" type="button" onclick="window.history.back()">Go Back</button>
+                </div>
+            </form>
+        </section>
+    </main>
 </body>
 </html>

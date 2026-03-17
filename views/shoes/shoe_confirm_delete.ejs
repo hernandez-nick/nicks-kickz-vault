@@ -11,17 +11,21 @@
 
     <%- include('../partials/_navbar.ejs', { title: "Delete " + shoe.brand + " " + shoe.model }) %>
 
-    <h1>Confirm Delete</h1>
+    <main class="main-content">
+        <section class="confirm-card">
+            
+            <h1 class="page-title">Confirm Delete</h1>
+            <p class="confirm-copy">Are you sure you want to delete the <strong><%= shoe.brand %> <%= shoe.model %></strong> from your vault?</p>
 
-    <p>Are you sure you want to delete the <%= shoe.brand %> <%= shoe.model %>?</p>
+            <div class="shoe-actions">
+                <form action="/shoes/<%= shoe._id %>?_method=DELETE" method="POST">
+                    <button class="btn-danger" type="submit">Yes, Delete <%= shoe.brand %> <%= shoe.model %></button>
+                </form>
 
-    <form action="/shoes/<%= shoe._id %>?_method=DELETE" method="POST">
-        <button type="submit">Yes, Delete <%= shoe.name %></button>
-    </form>
-
-    <a href="/shoes/<%= shoe._id %>/">
-        <button>Cancel</button>
-    </a>
+                <a class="btn-secondary" href="/shoes/<%= shoe._id %>/">Cancel</a>
+            </div>
+        </section>
+    </main>
 
 </body>
 

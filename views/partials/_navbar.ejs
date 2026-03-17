@@ -1,22 +1,30 @@
 <%- include('./_header.ejs', { title: title }) %>
 
-<nav>
-    <div>
+<nav class="navbar">
+    <div class="navbar-left">
+        <a href="/" class="navbar-brand">Nick's Kickz Vault</a>
+    </div>
+    <div class="navbar-center">
     <% if (currentUser) { %>
-        <a href="/">Home</a>
-        <a href="/shoes">Vault</a>
-        <a href="/shoes/new">Add New Shoe</a>
-        <a href="/auth/sign-out">Sign Out</a>
+        <a href="/" class="nav-link">⌂ Home</a>
+        <a href="/shoes" class="nav-link nav-link-active">⏲ Vault</a>
+        <a href="/shoes/new" class="nav-link">+ Add New Pair</a>
     <% } else { %>
-        <a href="/auth/sign-in">Sign In</a>
-        <a href="/auth/sign-up">Sign Up</a>
+        <a href="/auth/sign-in" class="nav-link">Sign In</a>
+        <a href="/auth/sign-up" class="nav-link">Sign Up</a>
     <% } %>
     </div>
-    <div>
-        <% if(currentUser) { %>
-            <strong id="avatar">
+    <div class="navbar-right">
+        <% if (currentUser) { %>
+        <div class="nav-user-info">
+            <div class="nav-user-text">
+                <span class="nav-user-name"><%= currentUser.username %></span>
+                <a href="/auth/sign-out" class="nav-signout">→ Sign Out</a>
+            </div>
+            <div class="nav-avatar">
                 <%= currentUser.username.charAt(0).toUpperCase() %>
-            </strong>
-            <% } %>
+            </div>
+        </div>
+        <% } %>
     </div>
 </nav>

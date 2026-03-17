@@ -9,20 +9,24 @@
     
     <%- include('../partials/_navbar.ejs', { title: "Vault" }) %>
 
-    <h1>Vault</h1>
+    <main class="main-content">
+        <a href="/shoes/new" class="btn-primary">+ Add New Pair</a>
 
-    <% if (shoes.length === 0) { %>
-        <p>No shoes added yet.</p>
-    <% } else { %>
-        <ul>
-            <% shoes.forEach((shoe, _id) => { %>
-                <li>
-                    <a class="shoe-card" href="/shoes/<%= shoe._id %>"><%= shoe.brand %> <%= shoe.model %> - $<%= shoe.retailPrice %></a>
-                </li>
-            <% }) %>
-        </ul>
-    <% } %>
+        <% if (shoes.length === 0) { %>
+            <p class="empty-msg">No shoes added yet.</p>
+        <% } else { %>
+            <div class="shoe-grid">
+                <% shoes.forEach((shoe) => { %>
+                    <div class="shoe-card">
+                        <p class="shoe-brand"><%= shoe.brand %></p>
+                        <p class="shoe-model"><%= shoe.model %></p>
+                        <img src="<%= shoe.imageUrl %>" alt="<%= shoe.brand %> <%= shoe.model %> shoe" class="shoe-thumb">
+                        <a href="/shoes/<%= shoe._id %>" class="btn-view">👀 View Details</a>
+                    </div>
+                <% }) %>
+            </div>
+        <% } %>
+    </main>
 
-    <button onclick="window.history.back()">Go Back</button>
 </body>
 </html>

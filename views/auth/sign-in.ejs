@@ -11,24 +11,34 @@
 
     <%- include('../partials/_navbar.ejs', { title: "Sign In" }) %>
 
-        <h1>Sign in to your account!</h1>
-        <% if (typeof message !=='undefined' ) { %>
-            <p style="color: red;font-style: italic;">
-                <%= message %>
-            </p>
-            <% } %>
-                <form action="/auth/sign-in" method="POST">
-                    <div>
-                        <label for="username">Username:</label>
+    <main class="main-content auth-shell">
+        <section class="form-card auth-card">
+            
+            <h1 class="page-title">Sign in to your account</h1>
+            
+            <form class="shoe-form auth-form" action="/auth/sign-in" method="POST">
+                <% if (typeof message !== 'undefined') { %>
+                    <p class="form-error"><%= message %></p>
+                <% } %>
+
+                <div class="form-grid auth-grid">
+                    <div class="field-group field-group-full">
+                        <label for="username">Username</label>
                         <input type="text" name="username" id="username" required placeholder="Enter your username" />
                     </div>
-                    <div>
-                        <label for="password">Password:</label>
-                        <input type="password" name="password" id="password" required
-                            placeholder="Enter your password" />
+                    <div class="field-group field-group-full">
+                        <label for="password">Password</label>
+                        <input type="password" name="password" id="password" required placeholder="Enter your password" />
                     </div>
-                    <button type="submit">Sign in</button>
-                </form>
+                </div>
+
+                <div class="shoe-actions">
+                    <button class="btn-primary" type="submit">Sign In</button>
+                    <a class="btn-secondary" href="/auth/sign-up">Create Account</a>
+                </div>
+            </form>
+        </section>
+    </main>
 </body>
 
 </html>

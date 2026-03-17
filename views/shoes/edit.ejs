@@ -1,75 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit A Shoe</title>
+    <title>Editing <%= shoe.brand %> <%= shoe.model %></title>
 </head>
 
 <body>
 
     <%- include('../partials/_navbar.ejs', { title: "Editing " + shoe.brand + " " + shoe.model }) %>
 
-        <h1>Editing the <%= shoe.brand %> <%= shoe.model %></h1>
-        
-        <form action="/shoes/<%= shoe._id %>?_method=PUT" method="POST">
-            <% if(typeof(message) !=="undefined" ) { %>
-                <strong><em>
-                        <p style="color: red;">
-                            <%= message %>
-                        </p>
-                    </em></strong>
+    <main class="main-content">
+        <section class="form-card">
+            <p class="detail-eyebrow">Edit Pair</p>
+            <h1 class="page-title">Edit <%= shoe.brand %> <%= shoe.model %></h1>
+
+            <form class="shoe-form" action="/shoes/<%= shoe._id %>?_method=PUT" method="POST">
+                <% if(typeof(message) !=="undefined" ) { %>
+                    <p class="form-error"><%= message %></p>
                 <% } %>
 
-                    <div>
-                        <label for="model">Model:</label>
+                <div class="form-grid">
+                    <div class="field-group">
+                        <label for="model">Model</label>
                         <input type="text" name="model" id="model" required value="<%= shoe.model %>" />
                     </div>
 
-                    <div>
-                        <label for="brand">Brand:</label>
+                    <div class="field-group">
+                        <label for="brand">Brand</label>
                         <input type="text" name="brand" id="brand" required value="<%= shoe.brand %>" />
                     </div>
 
-                    <div>
-                        <label for="colorway">Colorway:</label>
+                    <div class="field-group">
+                        <label for="colorway">Colorway</label>
                         <input type="text" name="colorway" id="colorway" required value="<%= shoe.colorway %>" />
                     </div>
 
-                    <div>
-                        <label for="retailPrice">Retail Price:</label>
+                    <div class="field-group">
+                        <label for="retailPrice">Retail Price</label>
                         <input type="number" name="retailPrice" id="retailPrice" required value="<%= shoe.retailPrice %>" />
                     </div>
 
-                    <div>
-                        <label for="size">Size:</label>
+                    <div class="field-group">
+                        <label for="size">Size</label>
                         <input type="number" name="size" id="size" required value="<%= shoe.size %>" />
                     </div>
 
-                    <div>
-                        <label for="isDeadstock">Deadstock:</label>
+                    <div class="field-group field-group-checkbox">
+                        <label for="isDeadstock">Deadstock</label>
                         <input type="checkbox" name="isDeadstock" id="isDeadstock" <% if (shoe.isDeadstock) { %>checked<% } %> />
                     </div>
 
-                    <div>
-                        <label for="imageUrl">Image URL:</label>
+                    <div class="field-group field-group-full">
+                        <label for="imageUrl">Image URL</label>
                         <input type="url" name="imageUrl" id="imageUrl" required value="<%= shoe.imageUrl %>" />
                     </div>
 
-                    <div>
-                        <label for="description">Description:</label>
-                        <textarea name="description" id="description"
-                            placeholder="Please enter a description of 100 characters or less." maxlength="100"
-                            type="text" required><%= shoe.description %></textarea>
+                    <div class="field-group field-group-full">
+                        <label for="description">Description</label>
+                        <textarea name="description" id="description" placeholder="Please enter a description of 100 characters or less." maxlength="100" required><%= shoe.description %></textarea>
                     </div>
+                </div>
 
-                    <button type="submit">Update Shoe</button>
-        </form>
-
-        <a class="shoes-index-link" href="/shoes">
-            <div class="index-link-text">Back to Shoes</div>
-        </a>
+                <div class="shoe-actions">
+                    <button class="btn-primary" type="submit">Update</button>
+                    <button class="btn-secondary" type="button" onclick="window.history.back()">Go Back</button>
+                </div>
+            </form>
+        </section>
+    </main>
 
 </body>
 

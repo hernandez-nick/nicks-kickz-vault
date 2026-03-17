@@ -6,14 +6,19 @@
     <title>Error Page</title>
 </head>
 <body>
-    
+
     <%- include('partials/_navbar.ejs', { title: "Error" }) %>
 
-        <h1>Danger, you have encountered an error!</h1>
-        <p><strong>Error Message:</strong>
-            <%= message %>
-        </p>
+    <main class="main-content">
+        <section class="confirm-card error-card">
+            <h1 class="page-title">Danger, you have encountered an error.</h1>
+            <p class="confirm-copy"><strong>Error Message:</strong> <%= message %></p>
 
-        <button onclick="window.history.back()">Go Back</button>
+            <div class="shoe-actions">
+                <button class="btn-secondary" type="button" onclick="window.history.back()">Go Back</button>
+                <a class="btn-primary" href="/">Return Home</a>
+            </div>
+        </section>
+    </main>
 </body>
 </html>

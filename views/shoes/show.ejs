@@ -10,29 +10,62 @@
 <body>
 
     <%- include('../partials/_navbar.ejs', { title: shoe.brand + " " + shoe.model }) %>
-    
-        <h1>The <%= shoe.brand %> <%= shoe.model %> Page</h1>
-        <p>Model: <%= shoe.model %></p>
-        <p>Brand: <%= shoe.brand %></p>
-        <p>Price: $<%= shoe.retailPrice %></p>
-        <p>Color: <%= shoe.colorway %></p>
-        <p>Size: <%= shoe.size %></p>
-        <p>Description: <%= shoe.description %></p>
-        <p><img src="<%= shoe.imageUrl %>" alt="Shoe Image" width="400" height=auto></p>
 
-        <div class="shoe-actions">
-            <a class="edit-link" href="/shoes/<%= shoe._id %>/edit">
-                <button class="edit-text">Edit <%= shoe.brand %> <%= shoe.model %></button>
-            </a>
+    <main class="main-content">
+        <section class="detail-shell">
+            <article class="detail-card">
+                
+                <h1 class="page-title"><%= shoe.brand %> <%= shoe.model %></h1>
+                <div class="spec-grid">
+                    <div class="spec-item">
+                        <span class="spec-label">Brand</span>
+                        <span class="spec-value"><%= shoe.brand %></span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Model</span>
+                        <span class="spec-value"><%= shoe.model %></span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Colorway</span>
+                        <span class="spec-value"><%= shoe.colorway %></span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Retail Price</span>
+                        <span class="spec-value">$<%= shoe.retailPrice %></span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Size</span>
+                        <span class="spec-value"><%= shoe.size %></span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Deadstock</span>
+                        <span class="spec-value"><%= shoe.isDeadstock ? "Yes" : "No" %></span>
+                    </div>
+                </div>
 
-            <a href="/shoes/<%= shoe._id %>/confirm_delete">
-                <button type="submit"> Delete <%= shoe.brand %> <%= shoe.model %></button>
-            </a>
+                <div class="detail-copy">
+                    <span class="spec-label">Description</span>
+                    <p><%= shoe.description %></p>
+                </div>
 
-            <a class="shoes-index-link" href="/shoes">
-                <div class="index-link-text">Back to Vault</div>
-            </a>
-        </div>
+                <div class="shoe-actions">
+                    <a class="btn-primary" href="/shoes/<%= shoe._id %>/edit">
+                        Edit <%= shoe.brand %> <%= shoe.model %>
+                    </a>
+
+                    <a class="btn-danger" href="/shoes/<%= shoe._id %>/confirm_delete">
+                        Delete <%= shoe.brand %> <%= shoe.model %>
+                    </a>
+
+                    <button class="btn-secondary" type="button" onclick="window.history.back()">Go Back</button>
+                </div>
+            </article>
+
+            <aside class="image-card">
+                <img class="detail-image" src="<%= shoe.imageUrl %>" alt="<%= shoe.brand %> <%= shoe.model %>">
+            </aside>
+        </section>
+    </main>
 
 </body>
 </html>

@@ -8,19 +8,23 @@
 <body>
 
     <%- include('partials/_navbar.ejs', { title: "Nick's Kickz Vault" }) %>
-    
-    <h1>Nick's Kickz Vault</h1>
 
-    <p>Track your shoe collection!</p>
+    <main class="main-content">
+        <section class="home-card">
+            <h1 class="page-title">Nick's Kickz Vault</h1>
+            <p class="home-subtitle">Track your shoe collection!</p>
 
-    <div class="auth-links">
-        <% if(user) { %>
-            <p>Welcome back <%= user.username %>            </p>
-            <% } else { %>
-                <a class="signup-link" href="/auth/sign-up">Sign Up</a>
-                <a class="signin-link" href="/auth/sign-in">Sign In</a>
-            <% } %>
-    </div>
+            <div class="shoe-actions">
+                <% if (currentUser) { %>
+                    <a class="btn-primary" href="/shoes">Open Vault</a>
+                    <a class="btn-secondary" href="/shoes/new">Add New Pair</a>
+                <% } else { %>
+                    <a class="btn-primary" href="/auth/sign-in">Sign In</a>
+                    <a class="btn-secondary" href="/auth/sign-up">Sign Up</a>
+                <% } %>
+            </div>
+        </section>
+    </main>
 
 </body>
 </html>
