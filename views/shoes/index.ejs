@@ -3,22 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Shoes</title>
+    <title>Vault</title>
 </head>
 <body>
     
-    <%- include('../partials/_navbar.ejs') %>
+    <%- include('../partials/_navbar.ejs', { title: "Vault" }) %>
 
-    <h1>All Shoes</h1>
+    <h1>Vault</h1>
 
     <% if (shoes.length === 0) { %>
         <p>No shoes added yet.</p>
     <% } else { %>
         <ul>
-            <% shoes.forEach((shoe) => { %>
+            <% shoes.forEach((shoe, _id) => { %>
                 <li>
-                    <a class="shoe-card" href="/shoes/<%= shoe._id %>"><%= shoe.brand %> <%= shoe.name %> - 
-                        $<%= shoe.price %></a>
+                    <a class="shoe-card" href="/shoes/<%= shoe._id %>"><%= shoe.brand %> <%= shoe.model %> - $<%= shoe.retailPrice %></a>
                 </li>
             <% }) %>
         </ul>

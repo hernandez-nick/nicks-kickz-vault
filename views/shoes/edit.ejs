@@ -9,9 +9,9 @@
 
 <body>
 
-    <%- include('../partials/_navbar.ejs') %>
+    <%- include('../partials/_navbar.ejs', { title: "Editing " + shoe.brand + " " + shoe.model }) %>
 
-        <h1>Editing the <%= shoe.brand %> <%= shoe.name %></h1>
+        <h1>Editing the <%= shoe.brand %> <%= shoe.model %></h1>
         
         <form action="/shoes/<%= shoe._id %>?_method=PUT" method="POST">
             <% if(typeof(message) !=="undefined" ) { %>
@@ -23,8 +23,8 @@
                 <% } %>
 
                     <div>
-                        <label for="name">Name:</label>
-                        <input type="text" name="name" id="name" required value="<%= shoe.name %>" />
+                        <label for="model">Model:</label>
+                        <input type="text" name="model" id="model" required value="<%= shoe.model %>" />
                     </div>
 
                     <div>
@@ -33,18 +33,28 @@
                     </div>
 
                     <div>
-                        <label for="price">Price:</label>
-                        <input type="text" name="price" id="price" required value="<%= shoe.price %>" />
+                        <label for="colorway">Colorway:</label>
+                        <input type="text" name="colorway" id="colorway" required value="<%= shoe.colorway %>" />
                     </div>
 
                     <div>
-                        <label for="color">Color:</label>
-                        <input type="text" name="color" id="color" required value="<%= shoe.color %>" />
+                        <label for="retailPrice">Retail Price:</label>
+                        <input type="number" name="retailPrice" id="retailPrice" required value="<%= shoe.retailPrice %>" />
                     </div>
 
                     <div>
                         <label for="size">Size:</label>
-                        <input type="text" name="size" id="size" required value="<%= shoe.size %>" />
+                        <input type="number" name="size" id="size" required value="<%= shoe.size %>" />
+                    </div>
+
+                    <div>
+                        <label for="isDeadstock">Deadstock:</label>
+                        <input type="checkbox" name="isDeadstock" id="isDeadstock" <% if (shoe.isDeadstock) { %>checked<% } %> />
+                    </div>
+
+                    <div>
+                        <label for="imageUrl">Image URL:</label>
+                        <input type="url" name="imageUrl" id="imageUrl" required value="<%= shoe.imageUrl %>" />
                     </div>
 
                     <div>

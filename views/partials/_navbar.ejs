@@ -1,14 +1,22 @@
-<link rel="stylesheet" href="/stylesheets/style.css">
+<%- include('./_header.ejs', { title: title }) %>
 
 <nav>
-    <a href="/">Home</a>
-    <a href="/shoes">Vault</a>
-    <a href="/shoes/new">Add New Shoe</a>
+    <div>
     <% if (currentUser) { %>
-        <span class="nav-user">Signed in as <%= currentUser.username %></span>
+        <a href="/">Home</a>
+        <a href="/shoes">Vault</a>
+        <a href="/shoes/new">Add New Shoe</a>
         <a href="/auth/sign-out">Sign Out</a>
     <% } else { %>
         <a href="/auth/sign-in">Sign In</a>
         <a href="/auth/sign-up">Sign Up</a>
     <% } %>
+    </div>
+    <div>
+        <% if(currentUser) { %>
+            <strong id="avatar">
+                <%= currentUser.username.charAt(0).toUpperCase() %>
+            </strong>
+            <% } %>
+    </div>
 </nav>

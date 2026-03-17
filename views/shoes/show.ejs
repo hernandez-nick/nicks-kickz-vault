@@ -9,15 +9,13 @@
 </head>
 <body>
 
-    <%- include('../partials/_navbar.ejs') %>
+    <%- include('../partials/_navbar.ejs', { title: shoe.brand + " " + shoe.model }) %>
     
-        <h1>The <em style="color: <%= shoe.color %>;">
-                <%= shoe.brand %> <%= shoe.name %>
-            </em> Page</h1>
-        <p>Name: <%= shoe.name %></p>
+        <h1>The <%= shoe.brand %> <%= shoe.model %> Page</h1>
+        <p>Model: <%= shoe.model %></p>
         <p>Brand: <%= shoe.brand %></p>
-        <p>Price: $<%= shoe.price %></p>
-        <p>Color: <%= shoe.color %></p>
+        <p>Price: $<%= shoe.retailPrice %></p>
+        <p>Color: <%= shoe.colorway %></p>
         <p>Size: <%= shoe.size %></p>
         <p>Description: <%= shoe.description %></p>
         <p><img src="<%= shoe.imageUrl %>" alt="Shoe Image" width="400" height=auto></p>
@@ -31,12 +29,8 @@
                 <button type="submit"> Delete <%= shoe.name %></button>
             </a>
 
-            <form class="shoe-action-form" action="/shoes/<%= shoe._id %>/soft?_method=DELETE" method="POST">
-                <button type="submit">Soft Delete <%= shoe.name %></button>
-            </form>
-
             <a class="shoes-index-link" href="/shoes">
-                <div class="index-link-text">Back to Shoes</div>
+                <div class="index-link-text">Back to Vault</div>
             </a>
         </div>
 

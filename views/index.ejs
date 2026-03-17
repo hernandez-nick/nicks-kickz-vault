@@ -7,11 +7,20 @@
 </head>
 <body>
 
-    <%- include('partials/_navbar.ejs') %>
+    <%- include('partials/_navbar.ejs', { title: "Nick's Kickz Vault" }) %>
     
     <h1>Nick's Kickz Vault</h1>
 
     <p>Track your shoe collection!</p>
+
+    <div class="auth-links">
+        <% if(user) { %>
+            <p>Welcome back <%= user.username %>            </p>
+            <% } else { %>
+                <a class="signup-link" href="/auth/sign-up">Sign Up</a>
+                <a class="signin-link" href="/auth/sign-in">Sign In</a>
+            <% } %>
+    </div>
 
 </body>
 </html>

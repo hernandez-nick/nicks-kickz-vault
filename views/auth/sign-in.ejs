@@ -9,7 +9,7 @@
 
 <body>
 
-    <%- include('../partials/_navbar.ejs') %>
+    <%- include('../partials/_navbar.ejs', { title: "Sign In" }) %>
 
         <h1>Sign in to your account!</h1>
         <% if (typeof message !=='undefined' ) { %>
@@ -29,8 +29,6 @@
                     </div>
                     <button type="submit">Sign in</button>
                 </form>
-
-                <button onclick="window.history.back()">Go Back</button>
 </body>
 
 </html>

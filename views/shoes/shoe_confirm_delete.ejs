@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,21 +9,20 @@
 
 <body>
 
-    <%- include('../partials/_navbar.ejs') %>
+    <%- include('../partials/_navbar.ejs', { title: "Delete " + shoe.brand + " " + shoe.model }) %>
 
-        <h1>Confirm Delete</h1>
+    <h1>Confirm Delete</h1>
 
-        <p>Are you sure you want to delete the shoe: <em style="color: <%= shoe.color %>;">
-                <%= shoe.name %>
-            </em>?</p>
-        <div class="shoe-actions">
-            <form class="delete-form" action="/shoes/<%= shoe._id %>?_method=DELETE" method="POST">
-                <button class="delete-button" type="submit">Delete <%= shoe.name %></button>
-            </form>
-        </div>
+    <p>Are you sure you want to delete the <%= shoe.brand %> <%= shoe.model %>?</p>
 
-        <button onclick="window.history.back()">No, Go Back</button>
-        
+    <form action="/shoes/<%= shoe._id %>?_method=DELETE" method="POST">
+        <button type="submit">Yes, Delete <%= shoe.name %></button>
+    </form>
+
+    <a href="/shoes/<%= shoe._id %>/">
+        <button>Cancel</button>
+    </a>
+
 </body>
 
 </html>
