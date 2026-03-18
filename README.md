@@ -57,7 +57,7 @@ Error Handling:
 
 [GitHub](https://github.com/hernandez-nick/nicks-kickz-vault)
 
-[Deployed project link]()
+[Deployed project link](https://nicks-kickz-vault-5cd807fa62c9.herokuapp.com/)
 
 ## Technologies Used
 
@@ -72,6 +72,7 @@ Error Handling:
 - express-session
 - bcrypt
 - method-override
+- cors
 - DotENV
 
 ## Attributions
@@ -79,6 +80,8 @@ Error Handling:
 [MDN](https://developer.mozilla.org/en-US/)
 
 [W3Schools](https://www.w3schools.com/)
+
+[CSS-Tricks](https://css-tricks.com/)
 
 ## Next Steps
 
